@@ -24,11 +24,12 @@ const CinevoConfig = {
 
     // === إعدادات الألوان ===
     theme: {
-        primary: '#1a1a1a',
-        secondary: '#e50914',
+        primary: '#0f0f0f',
+        secondary: '#1a1a2e',
+        accent: '#00d4ff',
         text: '#ffffff',
-        textSecondary: '#b3b3b3',
-        border: '#333333',
+        textSecondary: '#a0a0a0',
+        border: '#2a2a3e',
         success: '#4CAF50',
         warning: '#FFC107',
         danger: '#f44336'
@@ -37,40 +38,33 @@ const CinevoConfig = {
     // === إعدادات مصادر البث ===
     streamingSources: {
         enabled: true,
-        default: 'superembed',
+        default: 'vidsrc',
         sources: {
+            vidsrc: {
+                name: 'VidSrc',
+                url: 'https://vidsrc.to/embed/movie/',
+                quality: '1080p',
+                enabled: true,
+                reliability: 'high'
+            },
             superembed: {
                 name: 'SuperEmbed',
-                url: 'https://www.superembed.stream/embed/',
+                url: 'https://superembed.stream/embed/',
                 quality: '1080p',
                 enabled: true,
                 reliability: 'high'
             },
-            embed2: {
-                name: '2Embed',
-                url: 'https://www.2embed.to/embed/',
+            flixhq: {
+                name: 'FlixHQ',
+                url: 'https://flixhq.to/embed/',
                 quality: '1080p',
                 enabled: true,
                 reliability: 'high'
             },
-            doodstream: {
-                name: 'DoodStream',
-                url: 'https://dood.to/e/',
-                quality: '720p',
-                enabled: true,
-                reliability: 'medium'
-            },
-            mixdrop: {
-                name: 'MixDrop',
-                url: 'https://mixdrop.co/e/',
+            autoembed: {
+                name: 'AutoEmbed',
+                url: 'https://autoembed.to/embed/',
                 quality: '1080p',
-                enabled: true,
-                reliability: 'high'
-            },
-            streamtape: {
-                name: 'StreamTape',
-                url: 'https://streamtape.com/e/',
-                quality: '720p',
                 enabled: true,
                 reliability: 'high'
             }
