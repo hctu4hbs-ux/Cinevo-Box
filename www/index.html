@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinevo Box - أفلام ومسلسلات</title>
+    <meta name="description" content="منصة Cinevo Box - موقع بث متكامل للأفلام والمسلسلات مع دعم اللغة العربية والترجمات">
+    <meta name="keywords" content="أفلام, مسلسلات, بث, streaming, TMDB">
+    <meta property="og:title" content="Cinevo Box - أفلام ومسلسلات">
+    <meta property="og:description" content="منصة بث متكاملة للأفلام والمسلسلات بجودة عالية">
+    <meta property="og:url" content="https://hctu4hbs-ux.github.io/Cinevo-Box/">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <i class="fas fa-film"></i>
+                <span>Cinevo Box</span>
+            </div>
+            <div class="navbar-menu">
+                <a href="javascript:void(0)" onclick="loadSection('home')" class="nav-link active">الرئيسية</a>
+                <a href="javascript:void(0)" onclick="loadSection('movies')" class="nav-link">الأفلام</a>
+                <a href="javascript:void(0)" onclick="loadSection('tv')" class="nav-link">المسلسلات</a>
+                <a href="javascript:void(0)" onclick="loadSection('trending')" class="nav-link">الأكثر شهرة</a>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="ابحث عن فيلم أو مسلسل...">
+                <button onclick="performSearch()"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="homeSection" class="section active">
+            <!-- Featured Slider -->
+            <div class="featured-slider">
+                <div class="slider-content" id="sliderContent">
+                    <div class="slider-item">
+                        <img src="https://via.placeholder.com/1200x600" alt="Featured" class="slider-image">
+                        <div class="slider-overlay">
+                            <h2>مرحبا بك في Cinevo Box</h2>
+                            <p>استمتع بأفضل الأفلام والمسلسلات بجودة عالية</p>
+                            <button onclick="loadSection('movies')" class="cta-button">ابدأ المشاهدة</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Section -->
+            <div class="categories">
+                <div class="category-buttons">
+                    <button onclick="loadMoviesByGenre('all')" class="category-btn active">الكل</button>
+                    <button onclick="loadMoviesByGenre('28')" class="category-btn">أكشن</button>
+                    <button onclick="loadMoviesByGenre('35')" class="category-btn">كوميديا</button>
+                    <button onclick="loadMoviesByGenre('18')" class="category-btn">درامـا</button>
+                    <button onclick="loadMoviesByGenre('27')" class="category-btn">رعب</button>
+                    <button onclick="loadMoviesByGenre('10749')" class="category-btn">رومانسي</button>
+                </div>
+            </div>
+
+            <!-- Trending Section -->
+            <section class="content-section">
+                <h2 class="section-title">الأكثر شهرة الآن</h2>
+                <div class="content-grid" id="trendingGrid">
+                    <!-- Trending content will be loaded here -->
+                </div>
+            </section>
+
+            <!-- New Releases Section -->
+            <section class="content-section">
+                <h2 class="section-title">الإصدارات الجديدة</h2>
+                <div class="content-grid" id="newReleasesGrid">
+                    <!-- New releases will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Popular Movies Section -->
+            <section class="content-section">
+                <h2 class="section-title">الأفلام الشهيرة</h2>
+                <div class="content-grid" id="moviesGrid">
+                    <!-- Movies will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Popular TV Shows Section -->
+            <section class="content-section">
+                <h2 class="section-title">المسلسلات الشهيرة</h2>
+                <div class="content-grid" id="tvGrid">
+                    <!-- TV shows will be loaded here -->
+                </div>
+            </section>
+        </section>
+
+        <!-- Movies Section -->
+        <section id="moviesSection" class="section">
+            <div class="section-header">
+                <h1>الأفلام</h1>
+            </div>
+            <div class="filter-controls">
+                <select id="genreFilter" onchange="applyFilters()">
+                    <option value="">جميع الأنواع</option>
+                    <option value="28">أكشن</option>
+                    <option value="35">كوميديا</option>
+                    <option value="18">درامـا</option>
+                    <option value="27">رعب</option>
+                    <option value="10749">رومانسي</option>
+                    <option value="16">رسوم متحركة</option>
+                    <option value="36">تاريخي</option>
+                </select>
+                <select id="sortFilter" onchange="applyFilters()">
+                    <option value="popularity">الأكثر شهرة</option>
+                    <option value="rating">الأعلى تقييماً</option>
+                    <option value="release_date">الأحدث</option>
+                </select>
+            </div>
+            <div class="content-grid" id="allMoviesGrid">
+                <!-- Movies will be loaded here -->
+            </div>
+            <div class="pagination">
+                <button onclick="previousPage()" class="page-btn">السابق</button>
+                <span id="pageInfo">الصفحة 1</span>
+                <button onclick="nextPage()" class="page-btn">التالي</button>
+            </div>
+        </section>
+
+        <!-- TV Shows Section -->
+        <section id="tvSection" class="section">
+            <div class="section-header">
+                <h1>المسلسلات</h1>
+            </div>
+            <div class="content-grid" id="allTvGrid">
+                <!-- TV shows will be loaded here -->
+            </div>
+            <div class="pagination">
+                <button onclick="previousPage('tv')" class="page-btn">السابق</button>
+                <span id="pageInfoTv">الصفحة 1</span>
+                <button onclick="nextPage('tv')" class="page-btn">التالي</button>
+            </div>
+        </section>
+
+        <!-- Trending Section -->
+        <section id="trendingSection" class="section">
+            <div class="section-header">
+                <h1>الأكثر شهرة</h1>
+            </div>
+            <div class="content-grid" id="allTrendingGrid">
+                <!-- Trending content will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Details Section -->
+        <section id="detailsSection" class="section">
+            <button onclick="goBack()" class="back-button"><i class="fas fa-arrow-right"></i> العودة</button>
+            <div class="details-container">
+                <div class="details-header">
+                    <div class="details-poster">
+                        <img id="detailsPoster" src="" alt="Poster">
+                    </div>
+                    <div class="details-info">
+                        <h1 id="detailsTitle"></h1>
+                        <div class="rating-section">
+                            <span class="rating" id="detailsRating"></span>
+                            <span class="vote-count" id="detailsVotes"></span>
+                        </div>
+                        <p class="release-info" id="releaseInfo"></p>
+                        <p class="genres" id="genresList"></p>
+                        <p class="description" id="detailsDescription"></p>
+                        <div class="action-buttons">
+                            <button onclick="scrollToPlayer()" class="play-button"><i class="fas fa-play"></i> شاهد الآن</button>
+                            <button onclick="toggleFavorite()" class="favorite-button"><i class="fas fa-heart"></i> أضف إلى المفضلة</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Player Section -->
+                <div class="player-section" id="playerSection">
+                    <h2>مشغل الفيديو</h2>
+                    <div class="source-selector">
+                        <label>اختر المصدر:</label>
+                        <select id="sourceSelect" onchange="changeSource()">
+                            <option value="">جاري التحميل...</option>
+                        </select>
+                    </div>
+                    <div class="player-container">
+                        <iframe id="videoPlayer" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="additional-info">
+                    <h3>معلومات إضافية</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4>السنة</h4>
+                            <p id="yearInfo"></p>
+                        </div>
+                        <div class="info-item">
+                            <h4>الدولة</h4>
+                            <p id="countryInfo"></p>
+                        </div>
+                        <div class="info-item">
+                            <h4>المدة</h4>
+                            <p id="durationInfo"></p>
+                        </div>
+                        <div class="info-item">
+                            <h4>اللغة</h4>
+                            <p id="languageInfo"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Results Section -->
+        <section id="searchSection" class="section">
+            <div class="section-header">
+                <h1>نتائج البحث</h1>
+            </div>
+            <div class="content-grid" id="searchResultsGrid">
+                <!-- Search results will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Cinevo Box. جميع الحقوق محفوظة</p>
+            <p>تطوير بواسطة: <strong>eyad al-juhani</strong></p>
+            <p>ملاحظة: هذا الموقع يوفر روابط البث من مصادر خارجية متاحة للعموم</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/player.js"></script>
+</body>
+</html>

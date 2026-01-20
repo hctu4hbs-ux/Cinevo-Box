@@ -14,18 +14,24 @@
   ],
   "author": "eyad al-juhani",
   "license": "MIT",
-  "homepage": "https://hctu4hbs-ux.github.io/Cinevo-Box",
+  "homepage": "https://github.com/yourusername/Cinevo-Box",
   "liveUrl": "https://hctu4hbs-ux.github.io/Cinevo-Box",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hctu4hbs-ux/Cinevo-Box.git"
+    "url": "git+https://github.com/hctu4hbs-ux/Cinevo-Box.git"
   },
-  "homepage": "https://github.com/yourusername/Cinevo-Box",
   "scripts": {
     "start": "python -m http.server 8000",
     "dev": "python -m http.server 8000",
     "build": "echo 'No build required for static site'"
   },
-  "devDependencies": {},
-  "dependencies": {}
+  "devDependencies": {
+    "@capacitor/android": "^8.0.1",
+    "@capacitor/cli": "^8.0.1",
+    "@capacitor/core": "^8.0.1"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/hctu4hbs-ux/Cinevo-Box/issues"
+  }
 }
