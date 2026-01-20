@@ -12,7 +12,6 @@ let favorites = JSON.parse(localStorage.getItem('cinevoFavorites')) || [];
 document.addEventListener('DOMContentLoaded', function() {
     loadSection('home');
     setupEventListeners();
-    checkLoginStatus();
 });
 
 // Setup Event Listeners
@@ -330,9 +329,6 @@ async function showDetails(contentId, mediaType) {
         // Populate streaming sources
         populateStreamingSources(details.streamingLinks);
         
-        // Load Arabic subtitles
-        loadArabicSubtitles(details.imdbId);
-        
     } catch (error) {
         console.error('Error loading details:', error);
         showNotification('فشل تحميل التفاصيل', 'error');
@@ -392,11 +388,10 @@ function populateStreamingSources(links) {
     select.innerHTML = '';
     
     const sources = [
-        { name: 'SuperEmbed', key: 'superembed' },
         { name: 'VidSrc', key: 'vidsrc' },
-        { name: 'Flix2Day', key: 'flix2day' },
+        { name: 'SuperEmbed', key: 'superembed' },
         { name: 'FlixHQ', key: 'flixhq' },
-        { name: 'DoodStream', key: 'doodstream' }
+        { name: 'AutoEmbed', key: 'autoembed' }
     ];
     
     sources.forEach(source => {
@@ -431,48 +426,6 @@ function changeSource() {
                 showNotification('فشل تحميل المصدر. حاول مصدر آخر.', 'error');
             }
         }, 5000);
-    }
-}
-
-// Load Arabic Subtitles Automatically
-function loadArabicSubtitles(imdbId) {
-    const display = document.getElementById('subtitleDisplay');
-    const toggle = document.getElementById('subtitleToggle');
-    
-    // Load subtitles from OpenSubtitles or SubDL
-    SubtitleManager.loadArabicSubtitles(imdbId, window.currentDetails?.title)
-        .then(subtitles => {
-            if (subtitles && subtitles.length > 0) {
-                // Subtitles loaded successfully
-                toggle.checked = true;
-                display.style.display = 'block';
-                showNotification('تم تحميل الترجمات العربية بنجاح', 'success');
-            } else {
-                // No subtitles found
-                toggle.checked = false;
-                display.style.display = 'none';
-                console.log('No Arabic subtitles available for this content');
-            }
-        })
-        .catch(error => {
-            console.error('Error loading subtitles:', error);
-            toggle.checked = false;
-            display.style.display = 'none';
-        });
-}
-
-// Toggle Subtitles
-function toggleSubtitles() {
-    const isEnabled = document.getElementById('subtitleToggle').checked;
-    const display = document.getElementById('subtitleDisplay');
-    SubtitleManager.isEnabled = isEnabled;
-    
-    if (isEnabled) {
-        display.style.display = 'block';
-        showNotification('تم تفعيل الترجمات العربية', 'success');
-    } else {
-        display.style.display = 'none';
-        showNotification('تم تعطيل الترجمات', 'success');
     }
 }
 
@@ -575,50 +528,3 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
-
-// Check Login Status
-function checkLoginStatus() {
-    const isLoggedIn = localStorage.getItem('cinevoLoggedIn') === 'true';
-    const loginBtn = document.getElementById('loginBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const userGreeting = document.getElementById('userGreeting');
-    
-    if (isLoggedIn) {
-        loginBtn.style.display = 'none';
-        logoutBtn.style.display = 'flex';
-        
-        const userData = localStorage.getItem('cinevoUser');
-        const email = localStorage.getItem('cinevoEmail');
-        const username = localStorage.getItem('cinevoUsername');
-        
-        if (userData) {
-            const user = JSON.parse(userData);
-            userGreeting.textContent = `مرحباً، ${user.firstName}`;
-        } else if (username) {
-            userGreeting.textContent = `مرحباً، ${username}`;
-        }
-    } else {
-        loginBtn.style.display = 'flex';
-        logoutBtn.style.display = 'none';
-        userGreeting.textContent = '';
-    }
-}
-
-// Go to Login
-function goToLogin() {
-    window.location.href = 'login.html';
-}
-
-// Logout
-function logout() {
-    localStorage.removeItem('cinevoLoggedIn');
-    localStorage.removeItem('cinevoUser');
-    localStorage.removeItem('cinevoUsername');
-    
-    showNotification('تم تسجيل الخروج بنجاح', 'success');
-    
-    setTimeout(() => {
-        checkLoginStatus();
-        loadSection('home');
-    }, 1500);
-}

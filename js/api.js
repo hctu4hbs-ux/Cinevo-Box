@@ -3,13 +3,13 @@ const TMDB_API_KEY = '50b7a0444b169acb5c8f32e1fa88a7f4';
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
 
-// Streaming Sources Configuration
+// Streaming Sources Configuration - Best sources used by popular apps
 const STREAMING_SOURCES = {
-    superembed: 'https://superembed.stream/embed/',
-    flix2day: 'https://www.flix2day.to/embed/',
-    flixhq: 'https://flixhq.to/embed/',
     vidsrc: 'https://vidsrc.to/embed/movie/',
-    doodstream: 'https://dood.to/e/'
+    superembed: 'https://superembed.stream/embed/',
+    flixhq: 'https://flixhq.to/embed/',
+    autoembed: 'https://autoembed.to/embed/',
+    multiembed: 'https://multiembed.mov/?video_id='
 };
 
 // API Helper Function
@@ -82,7 +82,7 @@ function getExternalIds(data) {
     return data.external_ids || {};
 }
 
-// Generate Streaming Links
+// Generate Streaming Links - Using best sources from popular apps
 function generateStreamingLinks(imdbId, title, mediaType = 'movie') {
     const links = {};
     
@@ -90,24 +90,18 @@ function generateStreamingLinks(imdbId, title, mediaType = 'movie') {
         // Ensure IMDB ID has proper format (tt followed by numbers)
         const cleanImdbId = imdbId.startsWith('tt') ? imdbId : `tt${imdbId}`;
         
-        links.superembed = `${STREAMING_SOURCES.superembed}${cleanImdbId}`;
         links.vidsrc = `${STREAMING_SOURCES.vidsrc}${cleanImdbId}`;
-        links.flix2day = `${STREAMING_SOURCES.flix2day}${cleanImdbId}`;
+        links.superembed = `${STREAMING_SOURCES.superembed}${cleanImdbId}`;
         links.flixhq = `${STREAMING_SOURCES.flixhq}${cleanImdbId}`;
+        links.autoembed = `${STREAMING_SOURCES.autoembed}${cleanImdbId}`;
         
-        // For shows, append season/episode info if available
+        // For TV shows, append season/episode info
         if (mediaType === 'tv') {
-            links.superembed += '?s=1&e=1';
             links.vidsrc += '?s=1&e=1';
-            links.flix2day += '?s=1&e=1';
+            links.superembed += '?s=1&e=1';
             links.flixhq += '?s=1&e=1';
+            links.autoembed += '?s=1&e=1';
         }
-    }
-    
-    // Alternative source using title search (DoodStream)
-    const searchTitle = encodeURIComponent(title.replace(/[^\w\s]/g, ''));
-    if (searchTitle && searchTitle !== '') {
-        links.doodstream = `${STREAMING_SOURCES.doodstream}${searchTitle}`;
     }
     
     return links;
