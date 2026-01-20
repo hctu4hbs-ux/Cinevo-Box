@@ -6,12 +6,12 @@
 }
 
 :root {
-    --primary-color: #0f0f0f;
-    --secondary-color: #1a1a2e;
-    --accent-color: #ff6b35;
+    --primary-color: #0a0a0a;
+    --secondary-color: #151515;
+    --accent-color: #ff9d2b;
     --text-color: #ffffff;
-    --text-secondary: #a0a0a0;
-    --border-color: #2a2a3e;
+    --text-secondary: #999999;
+    --border-color: #222222;
     --success-color: #4CAF50;
     --warning-color: #FFC107;
     --danger-color: #f44336;
@@ -22,8 +22,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, var(--primary-color) 0%, #1a1a2e 100%);
-    background-attachment: fixed;
+    background: var(--primary-color);
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
@@ -41,16 +40,16 @@ button {
     outline: none;
 }
 
-/* Navbar - Premium Design */
+/* Navbar - Plex Style */
 .navbar {
-    background: linear-gradient(90deg, rgba(15, 15, 15, 0.95) 0%, rgba(26, 26, 46, 0.95) 100%);
+    background: var(--primary-color);
     backdrop-filter: blur(10px);
-    padding: 1rem 0;
+    padding: 1.2rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid var(--border-color);
-    box-shadow: var(--shadow);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .navbar-container {
@@ -68,24 +67,20 @@ button {
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    font-size: 1.6rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--accent-color) 0%, #ff9068 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-color);
     white-space: nowrap;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 .navbar-logo i {
-    font-size: 2rem;
-    color: var(--accent-color);
+    font-size: 1.8rem;
 }
 
 .navbar-menu {
     display: flex;
-    gap: 3rem;
+    gap: 2.5rem;
     flex: 1;
     justify-content: flex-end;
 }
@@ -93,21 +88,22 @@ button {
 .nav-link {
     color: var(--text-secondary);
     transition: var(--transition);
-    padding: 0.7rem 1.2rem;
-    border-radius: 8px;
+    padding: 0.5rem 0;
+    border-radius: 0;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     position: relative;
+    border-bottom: 2px solid transparent;
 }
 
 .nav-link::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--accent-color), #ff9068);
+    background: var(--accent-color);
     transition: var(--transition);
 }
 
@@ -124,19 +120,18 @@ button {
 .search-container {
     display: flex;
     gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border-color);
-    border-radius: 50px;
-    padding: 0.7rem 1.5rem;
-    min-width: 250px;
-    backdrop-filter: blur(5px);
+    border-radius: 25px;
+    padding: 0.7rem 1.2rem;
+    min-width: 220px;
     transition: var(--transition);
 }
 
 .search-container:focus-within {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.1);
     border-color: var(--accent-color);
-    box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+    box-shadow: 0 0 15px rgba(255, 157, 43, 0.2);
 }
 
 .search-container input {
@@ -146,7 +141,7 @@ button {
     padding: 0.5rem 0;
     outline: none;
     flex: 1;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 .search-container input::placeholder {
@@ -154,12 +149,12 @@ button {
 }
 
 .search-container button {
-    background: linear-gradient(135deg, var(--accent-color), #ff9068);
+    background: var(--accent-color);
     color: white;
     border: none;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -229,16 +224,17 @@ button {
     }
 }
 
-/* Featured Slider */
+/* Featured Slider - Plex Style */
 .featured-slider {
     margin-bottom: 3rem;
-    border-radius: 8px;
+    border-radius: 0;
     overflow: hidden;
+    height: 450px;
 }
 
 .slider-content {
     position: relative;
-    height: 400px;
+    height: 100%;
 }
 
 .slider-item {
@@ -259,7 +255,7 @@ button {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent);
+    background: linear-gradient(90deg, rgba(10, 10, 10, 0.9) 0%, rgba(10, 10, 10, 0.5) 40%, transparent 100%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -268,16 +264,16 @@ button {
 }
 
 .slider-overlay h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
     font-weight: 800;
-    letter-spacing: -0.5px;
+    letter-spacing: -1px;
 }
 
 .slider-overlay p {
     font-size: 1.1rem;
-    margin-bottom: 2rem;
-    max-width: 600px;
+    margin-bottom: 2.5rem;
+    max-width: 500px;
     color: rgba(255, 255, 255, 0.9);
 }
 
@@ -340,22 +336,24 @@ button {
     box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
 }
 
-/* Content Grid */
+/* Content Grid - Plex Style Carousels */
 .content-section {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
 }
 
 .section-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-bottom: 1.5rem;
     color: var(--text-color);
-    border-bottom: 3px solid var(--secondary-color);
-    padding-bottom: 0.5rem;
-    display: inline-block;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    border: none;
+    padding: 0;
+    display: block;
 }
 
 .section-header {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .section-header h1 {
@@ -366,18 +364,40 @@ button {
 }
 
 .content-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.8rem;
+    display: flex;
+    gap: 1.5rem;
     margin-bottom: 2rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-behavior: smooth;
+}
+
+.content-grid::-webkit-scrollbar {
+    height: 4px;
+}
+
+.content-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+}
+
+.content-grid::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+.content-grid::-webkit-scrollbar-thumb:hover {
+    background: #ff9d2b;
 }
 
 .content-card {
-    background: linear-gradient(135deg, rgba(26, 26, 46, 0.4) 0%, rgba(15, 15, 15, 0.6) 100%);
-    border-radius: 12px;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, rgba(21, 21, 21, 0.8) 100%);
+    border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
     transition: var(--transition);
+    flex-shrink: 0;
+    width: 180px;
     border: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
@@ -385,15 +405,14 @@ button {
 }
 
 .content-card:hover {
-    transform: translateY(-12px);
+    transform: scale(1.05) translateY(-8px);
     border-color: var(--accent-color);
-    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2), 0 0 40px rgba(0, 0, 0, 0.5);
-    background: linear-gradient(135deg, rgba(26, 26, 46, 0.6) 0%, rgba(15, 15, 15, 0.8) 100%);
+    box-shadow: 0 12px 30px rgba(255, 157, 43, 0.3), inset 0 0 20px rgba(255, 157, 43, 0.1);
 }
 
 .card-poster {
     width: 100%;
-    height: 300px;
+    height: 270px;
     object-fit: cover;
     background: linear-gradient(135deg, #2a2a3e, #0f0f0f);
     position: relative;
