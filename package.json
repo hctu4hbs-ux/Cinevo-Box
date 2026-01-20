@@ -1,0 +1,29 @@
+{
+  "name": "cinevo-box",
+  "version": "1.0.0",
+  "description": "منصة بث متكاملة للأفلام والمسلسلات - Integrated movie and TV series streaming platform",
+  "main": "index.html",
+  "keywords": [
+    "movies",
+    "tv-shows",
+    "streaming",
+    "tmdb",
+    "video-player",
+    "subtitles",
+    "arabic"
+  ],
+  "author": "eyad al-juhani",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/Cinevo-Box.git"
+  },
+  "homepage": "https://github.com/yourusername/Cinevo-Box",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "build": "echo 'No build required for static site'"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

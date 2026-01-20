@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinevo Box - نصائح للبدء</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            color: #fff;
+            padding: 2rem;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 3px solid #e50914;
+            padding-bottom: 2rem;
+        }
+        
+        h1 {
+            color: #e50914;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: #b3b3b3;
+            font-size: 1.1rem;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: #111;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            border-color: #e50914;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.2);
+        }
+        
+        .card h2 {
+            color: #e50914;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .card p {
+            color: #b3b3b3;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .card code {
+            background: #222;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            color: #4CAF50;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .code-block {
+            background: #222;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 4px solid #e50914;
+        }
+        
+        .code-block code {
+            color: #4CAF50;
+            font-family: 'Courier New', monospace;
+            display: block;
+            white-space: pre;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #e50914;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            background: #b8070d;
+            transform: scale(1.05);
+        }
+        
+        .features {
+            background: #111;
+            border: 2px solid #e50914;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .features h2 {
+            color: #e50914;
+            margin-bottom: 1.5rem;
+        }
+        
+        .features ul {
+            list-style: none;
+            columns: 2;
+            gap: 2rem;
+        }
+        
+        .features li {
+            color: #b3b3b3;
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features li:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-left: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer {
+            text-align: center;
+            border-top: 2px solid #333;
+            padding-top: 2rem;
+            color: #b3b3b3;
+        }
+        
+        .footer strong {
+            color: #e50914;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .features ul {
+                columns: 1;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 مرحباً بك في Cinevo Box</h1>
+            <p class="subtitle">منصة البث المتكاملة للأفلام والمسلسلات</p>
+        </header>
+
+        <div class="features">
+            <h2>✨ المميزات المتاحة</h2>
+            <ul>
+                <li>عرض الأفلام والمسلسلات من TMDB</li>
+                <li>بحث متقدم وفلاتر</li>
+                <li>صفحة تفاصيل كاملة</li>
+                <li>مشغل فيديو متعدد المصادر</li>
+                <li>ترجمات عربية</li>
+                <li>قائمة المفضلة</li>
+                <li>واجهة داكنة حديثة</li>
+                <li>دعم جميع الأجهزة</li>
+            </ul>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h2>🚀 ابدأ الآن</h2>
+                <p>اذهب إلى الصفحة الرئيسية وابدأ باستكشاف الأفلام والمسلسلات.</p>
+                <a href="index.html" class="btn">الذهاب للموقع</a>
+            </div>
+
+            <div class="card">
+                <h2>🔧 التطوير المحلي</h2>
+                <p>لتشغيل الموقع محلياً:</p>
+                <div class="code-block">
+                    <code>python -m http.server 8000</code>
+                </div>
+                <p>ثم افتح: <code>http://localhost:8000</code></p>
+            </div>
+
+            <div class="card">
+                <h2>📚 التوثيق</h2>
+                <p>اقرأ دليل المطورين والتعليمات التفصيلية:</p>
+                <ul style="list-style-position: inside; color: #b3b3b3;">
+                    <li><a href="CONTRIBUTING.md" style="color: #e50914;">دليل المطورين</a></li>
+                    <li><a href="DEPLOYMENT.md" style="color: #e50914;">دليل النشر</a></li>
+                    <li><a href="README.md" style="color: #e50914;">ملف README</a></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>🌐 مصادر البث</h2>
+                <p>الموقع يدعم عدة مصادر بث موثوقة:</p>
+                <ul style="list-style-position: inside; color: #b3b3b3;">
+                    <li>SuperEmbed</li>
+                    <li>2Embed</li>
+                    <li>DoodStream</li>
+                    <li>MixDrop</li>
+                    <li>StreamTape</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>🔑 مفتاح API</h2>
+                <p>المشروع مزود بمفتاح TMDB API جاهز للاستخدام.</p>
+                <p style="color: #4CAF50; font-weight: bold;">✓ لا حاجة لأي إعداد إضافي</p>
+                <p style="font-size: 0.9rem; color: #666;">يمكنك استخدام مفتاحك الخاص من TMDB</p>
+            </div>
+
+            <div class="card">
+                <h2>💬 المساعدة</h2>
+                <p>إذا واجهت مشكلة ما:</p>
+                <ol style="list-style-position: inside; color: #b3b3b3;">
+                    <li>افتح F12 (Developer Tools)</li>
+                    <li>تحقق من رسائل الأخطاء</li>
+                    <li>راجع ملف CONTRIBUTING.md</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2>⚙️ البنية التقنية</h2>
+            <div class="code-block">
+                <code>Frontend: HTML5 + CSS3 + JavaScript ES6+
+API: The Movie Database (TMDB)
+Streaming: SuperEmbed, 2Embed, DoodStream, MixDrop, StreamTape
+Subtitles: TMDB Subtitles + External APIs
+Storage: Browser LocalStorage</code>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2>🎯 الخطوات التالية</h2>
+            <ul>
+                <li>اختبر الموقع على أجهزة مختلفة</li>
+                <li>اقرأ التوثيق الكاملة</li>
+                <li>حسّن الميزات حسب احتياجاتك</li>
+                <li>انشر الموقع على الإنترنت</li>
+                <li>شارك الموقع مع الأصدقاء</li>
+            </ul>
+        </div>
+
+        <footer class="footer">
+            <p>تطوير بواسطة: <strong>eyad al-juhani</strong></p>
+            <p style="margin-top: 1rem;">© 2026 Cinevo Box. جميع الحقوق محفوظة.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">الإصدار: 1.0.0 | الحالة: جاهز للإطلاق ✅</p>
+        </footer>
+    </div>
+</body>
+</html>
