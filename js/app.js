@@ -392,9 +392,11 @@ function populateStreamingSources(links) {
     
     const sources = [
         { name: 'VidSrc', key: 'vidsrc' },
-        { name: 'SuperEmbed', key: 'superembed' },
-        { name: 'FlixHQ', key: 'flixhq' },
-        { name: 'AutoEmbed', key: 'autoembed' }
+        { name: 'Embed.su', key: 'embed_su' },
+        { name: 'Upstream', key: 'upstream' },
+        { name: 'FileMoon', key: 'filemoon' },
+        { name: 'StreamWish', key: 'streamwish' },
+        { name: 'Voe', key: 'voe' }
     ];
     
     sources.forEach(source => {

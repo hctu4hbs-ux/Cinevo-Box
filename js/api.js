@@ -3,12 +3,14 @@ const TMDB_API_KEY = '50b7a0444b169acb5c8f32e1fa88a7f4';
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
 
-// Streaming Sources Configuration - Best sources used by popular apps
+// Streaming Sources Configuration - Best sources from popular streaming websites
 const STREAMING_SOURCES = {
     vidsrc: 'https://vidsrc.to/embed/movie/',
-    superembed: 'https://superembed.stream/embed/',
-    flixhq: 'https://flixhq.to/embed/',
-    autoembed: 'https://autoembed.to/embed/'
+    embed_su: 'https://embed.su/embed/',
+    upstream: 'https://upstream.to/embed/',
+    filemoon: 'https://filemoon.sx/e/',
+    streamwish: 'https://streamwish.to/e/',
+    voe: 'https://voe.sx/e/'
 };
 
 // API Helper Function
@@ -90,16 +92,20 @@ function generateStreamingLinks(imdbId, title, mediaType = 'movie') {
         const cleanImdbId = imdbId.startsWith('tt') ? imdbId : `tt${imdbId}`;
         
         links.vidsrc = `${STREAMING_SOURCES.vidsrc}${cleanImdbId}`;
-        links.superembed = `${STREAMING_SOURCES.superembed}${cleanImdbId}`;
-        links.flixhq = `${STREAMING_SOURCES.flixhq}${cleanImdbId}`;
-        links.autoembed = `${STREAMING_SOURCES.autoembed}${cleanImdbId}`;
+        links.embed_su = `${STREAMING_SOURCES.embed_su}${cleanImdbId}`;
+        links.upstream = `${STREAMING_SOURCES.upstream}${cleanImdbId}`;
+        links.filemoon = `${STREAMING_SOURCES.filemoon}${cleanImdbId}`;
+        links.streamwish = `${STREAMING_SOURCES.streamwish}${cleanImdbId}`;
+        links.voe = `${STREAMING_SOURCES.voe}${cleanImdbId}`;
         
         // For TV shows, append season/episode info
         if (mediaType === 'tv') {
             links.vidsrc += '?s=1&e=1';
-            links.superembed += '?s=1&e=1';
-            links.flixhq += '?s=1&e=1';
-            links.autoembed += '?s=1&e=1';
+            links.embed_su += '?s=1&e=1';
+            links.upstream += '?s=1&e=1';
+            links.filemoon += '?s=1&e=1';
+            links.streamwish += '?s=1&e=1';
+            links.voe += '?s=1&e=1';
         }
     }
     
