@@ -5,11 +5,11 @@ const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
 
 // Streaming Sources Configuration
 const STREAMING_SOURCES = {
-    superembed: 'https://www.superembed.stream/embed/',
-    embed2: 'https://www.2embed.to/embed/',
-    doodstream: 'https://dood.to/e/',
-    mixdrop: 'https://mixdrop.co/e/',
-    streamtape: 'https://streamtape.com/e/'
+    superembed: 'https://superembed.stream/embed/',
+    flix2day: 'https://www.flix2day.to/embed/',
+    flixhq: 'https://flixhq.to/embed/',
+    vidsrc: 'https://vidsrc.to/embed/movie/',
+    doodstream: 'https://dood.to/e/'
 };
 
 // API Helper Function
@@ -87,21 +87,28 @@ function generateStreamingLinks(imdbId, title, mediaType = 'movie') {
     const links = {};
     
     if (imdbId) {
-        links.superembed = `${STREAMING_SOURCES.superembed}${imdbId}`;
-        links.embed2 = `${STREAMING_SOURCES.embed2}${imdbId}`;
+        // Ensure IMDB ID has proper format (tt followed by numbers)
+        const cleanImdbId = imdbId.startsWith('tt') ? imdbId : `tt${imdbId}`;
+        
+        links.superembed = `${STREAMING_SOURCES.superembed}${cleanImdbId}`;
+        links.vidsrc = `${STREAMING_SOURCES.vidsrc}${cleanImdbId}`;
+        links.flix2day = `${STREAMING_SOURCES.flix2day}${cleanImdbId}`;
+        links.flixhq = `${STREAMING_SOURCES.flixhq}${cleanImdbId}`;
         
         // For shows, append season/episode info if available
         if (mediaType === 'tv') {
             links.superembed += '?s=1&e=1';
-            links.embed2 += '?s=1&e=1';
+            links.vidsrc += '?s=1&e=1';
+            links.flix2day += '?s=1&e=1';
+            links.flixhq += '?s=1&e=1';
         }
     }
     
-    // Alternative sources using title search
+    // Alternative source using title search (DoodStream)
     const searchTitle = encodeURIComponent(title.replace(/[^\w\s]/g, ''));
-    links.doodstream = `${STREAMING_SOURCES.doodstream}${searchTitle}`;
-    links.mixdrop = `${STREAMING_SOURCES.mixdrop}${searchTitle}`;
-    links.streamtape = `${STREAMING_SOURCES.streamtape}${searchTitle}`;
+    if (searchTitle && searchTitle !== '') {
+        links.doodstream = `${STREAMING_SOURCES.doodstream}${searchTitle}`;
+    }
     
     return links;
 }
@@ -109,23 +116,33 @@ function generateStreamingLinks(imdbId, title, mediaType = 'movie') {
 // Fetch Subtitles (OpenSubtitles API Alternative)
 async function fetchSubtitles(imdbId, language = 'ar') {
     try {
-        // Using a free subtitle API
-        const response = await fetch(`https://www.opensubtitles.com/en/search?MovieImdbRating=-&SubLanguageID=${language}&MovieImdbRating=0&MovieName=${imdbId}`);
-        return response;
+        // Using SubtitleAPI as fallback
+        const response = await fetch(`https://www.subtitleapi.io/api/v1/subtitles?imdbid=${imdbId}&language=${language}`);
+        return response.ok ? await response.json() : null;
     } catch (error) {
-        console.log('Subtitles not available:', error);
+        console.log('Subtitles API error:', error);
         return null;
     }
 }
 
-// Get Arabic Subtitles
+// Get Arabic Subtitles using multiple sources
 async function getArabicSubtitles(imdbId) {
     try {
-        // Using a subtitle API that supports Arabic
-        const response = await fetch(`https://www.opensubtitles.com/en/search?imdbid=${imdbId}&sublanguageid=ara`);
-        return response;
+        // Try multiple subtitle sources
+        let subtitles = null;
+        
+        // Try VTT subtitle service
+        subtitles = await fetch(`https://www.subtitleapi.io/api/v1/subtitles?imdbid=${imdbId}&language=ar`).then(r => r.json()).catch(() => null);
+        
+        if (subtitles) {
+            return subtitles;
+        }
+        
+        // Fallback: return null if no subtitles found
+        console.log('Arabic subtitles not available for this content');
+        return null;
     } catch (error) {
-        console.log('Arabic subtitles not available:', error);
+        console.log('Error fetching Arabic subtitles:', error);
         return null;
     }
 }

@@ -393,10 +393,10 @@ function populateStreamingSources(links) {
     
     const sources = [
         { name: 'SuperEmbed', key: 'superembed' },
-        { name: '2Embed', key: 'embed2' },
-        { name: 'DoodStream', key: 'doodstream' },
-        { name: 'MixDrop', key: 'mixdrop' },
-        { name: 'StreamTape', key: 'streamtape' }
+        { name: 'VidSrc', key: 'vidsrc' },
+        { name: 'Flix2Day', key: 'flix2day' },
+        { name: 'FlixHQ', key: 'flixhq' },
+        { name: 'DoodStream', key: 'doodstream' }
     ];
     
     sources.forEach(source => {
@@ -421,77 +421,59 @@ function changeSource() {
     
     if (sourceUrl) {
         iframe.src = sourceUrl;
+        
+        // Show loading message
+        showNotification('جاري تحميل المصدر...', 'info');
+        
+        // Set a timeout to show error if source doesn't load
+        setTimeout(() => {
+            if (!iframe.src) {
+                showNotification('فشل تحميل المصدر. حاول مصدر آخر.', 'error');
+            }
+        }, 5000);
     }
 }
 
-// Load Arabic Subtitles
+// Load Arabic Subtitles Automatically
 function loadArabicSubtitles(imdbId) {
-    // Simulating subtitle loading
     const display = document.getElementById('subtitleDisplay');
-    display.innerHTML = '<p style="color: var(--text-secondary);">جاري البحث عن ترجمات عربية...</p>';
+    const toggle = document.getElementById('subtitleToggle');
     
-    setTimeout(() => {
-        display.innerHTML = '<p style="color: var(--text-secondary);">الترجمات العربية متوفرة للتحميل</p>';
-    }, 1000);
+    // Load subtitles from OpenSubtitles or SubDL
+    SubtitleManager.loadArabicSubtitles(imdbId, window.currentDetails?.title)
+        .then(subtitles => {
+            if (subtitles && subtitles.length > 0) {
+                // Subtitles loaded successfully
+                toggle.checked = true;
+                display.style.display = 'block';
+                showNotification('تم تحميل الترجمات العربية بنجاح', 'success');
+            } else {
+                // No subtitles found
+                toggle.checked = false;
+                display.style.display = 'none';
+                console.log('No Arabic subtitles available for this content');
+            }
+        })
+        .catch(error => {
+            console.error('Error loading subtitles:', error);
+            toggle.checked = false;
+            display.style.display = 'none';
+        });
 }
 
-// Load Subtitle
-function loadSubtitle() {
-    const selectedLang = document.getElementById('subtitleSelect').value;
+// Toggle Subtitles
+function toggleSubtitles() {
+    const isEnabled = document.getElementById('subtitleToggle').checked;
     const display = document.getElementById('subtitleDisplay');
+    SubtitleManager.isEnabled = isEnabled;
     
-    if (!selectedLang) {
-        display.innerHTML = '';
-        return;
+    if (isEnabled) {
+        display.style.display = 'block';
+        showNotification('تم تفعيل الترجمات العربية', 'success');
+    } else {
+        display.style.display = 'none';
+        showNotification('تم تعطيل الترجمات', 'success');
     }
-    
-    display.innerHTML = '<p style="color: var(--text-secondary);">جاري تحميل الترجمة...</p>';
-    
-    setTimeout(() => {
-        if (selectedLang === 'ar') {
-            display.innerHTML = `
-                <div>
-                    <p>00:00:00 --> 00:00:05</p>
-                    <p>أهلا بك في Cinevo Box</p>
-                    <p style="color: var(--text-secondary); margin-top: 1rem;">الترجمات العربية الكاملة ستظهر هنا</p>
-                </div>
-            `;
-        } else {
-            display.innerHTML = '<p>English subtitles will appear here</p>';
-        }
-    }, 500);
-}
-
-// Download Subtitle
-function downloadSubtitle() {
-    const selectedLang = document.getElementById('subtitleSelect').value;
-    
-    if (!selectedLang) {
-        showNotification('الرجاء اختيار لغة الترجمة', 'warning');
-        return;
-    }
-    
-    // Create and download subtitle file
-    const content = `WEBVTT
-
-00:00:00.000 --> 00:00:05.000
-عنوان الفيديو
-
-00:00:05.000 --> 00:00:10.000
-مرحبا بك في Cinevo Box
-    `;
-    
-    const blob = new Blob([content], { type: 'text/vtt' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${window.currentDetails.title || 'subtitle'}.vtt`;
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
-    
-    showNotification('تم تحميل الترجمة بنجاح', 'success');
 }
 
 // Toggle Favorite

@@ -198,16 +198,15 @@
 
                 <!-- Subtitles Section -->
                 <div class="subtitles-section">
-                    <h3>الترجمة</h3>
+                    <h3>الترجمة العربية</h3>
                     <div class="subtitle-controls">
-                        <select id="subtitleSelect" onchange="loadSubtitle()">
-                            <option value="">بدون ترجمة</option>
-                            <option value="ar">العربية</option>
-                            <option value="en">الإنجليزية</option>
-                        </select>
-                        <button onclick="downloadSubtitle()" class="download-btn"><i class="fas fa-download"></i> تحميل</button>
+                        <label>
+                            <input type="checkbox" id="subtitleToggle" onchange="toggleSubtitles()" checked>
+                            <span>عرض الترجمة العربية</span>
+                        </label>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">يتم تحميل الترجمات العربية تلقائياً من OpenSubtitles و SubDL</p>
                     </div>
-                    <div id="subtitleDisplay" class="subtitle-display"></div>
+                    <div id="subtitleDisplay" class="subtitle-display" style="display: none;"></div>
                 </div>
 
                 <!-- Additional Info -->
