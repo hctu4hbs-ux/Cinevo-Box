@@ -3,13 +3,12 @@ const TMDB_API_KEY = '50b7a0444b169acb5c8f32e1fa88a7f4';
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
 
-// Streaming Sources Configuration
+// Streaming Sources Configuration - Best sources used by popular apps
 const STREAMING_SOURCES = {
-    superembed: 'https://www.superembed.stream/embed/',
-    embed2: 'https://www.2embed.to/embed/',
-    doodstream: 'https://dood.to/e/',
-    mixdrop: 'https://mixdrop.co/e/',
-    streamtape: 'https://streamtape.com/e/'
+    vidsrc: 'https://vidsrc.to/embed/movie/',
+    superembed: 'https://superembed.stream/embed/',
+    flixhq: 'https://flixhq.to/embed/',
+    autoembed: 'https://autoembed.to/embed/'
 };
 
 // API Helper Function
@@ -87,21 +86,22 @@ function generateStreamingLinks(imdbId, title, mediaType = 'movie') {
     const links = {};
     
     if (imdbId) {
-        links.superembed = `${STREAMING_SOURCES.superembed}${imdbId}`;
-        links.embed2 = `${STREAMING_SOURCES.embed2}${imdbId}`;
+        // Ensure IMDB ID has proper format (tt followed by numbers)
+        const cleanImdbId = imdbId.startsWith('tt') ? imdbId : `tt${imdbId}`;
         
-        // For shows, append season/episode info if available
+        links.vidsrc = `${STREAMING_SOURCES.vidsrc}${cleanImdbId}`;
+        links.superembed = `${STREAMING_SOURCES.superembed}${cleanImdbId}`;
+        links.flixhq = `${STREAMING_SOURCES.flixhq}${cleanImdbId}`;
+        links.autoembed = `${STREAMING_SOURCES.autoembed}${cleanImdbId}`;
+        
+        // For TV shows, append season/episode info
         if (mediaType === 'tv') {
+            links.vidsrc += '?s=1&e=1';
             links.superembed += '?s=1&e=1';
-            links.embed2 += '?s=1&e=1';
+            links.flixhq += '?s=1&e=1';
+            links.autoembed += '?s=1&e=1';
         }
     }
-    
-    // Alternative sources using title search
-    const searchTitle = encodeURIComponent(title.replace(/[^\w\s]/g, ''));
-    links.doodstream = `${STREAMING_SOURCES.doodstream}${searchTitle}`;
-    links.mixdrop = `${STREAMING_SOURCES.mixdrop}${searchTitle}`;
-    links.streamtape = `${STREAMING_SOURCES.streamtape}${searchTitle}`;
     
     return links;
 }

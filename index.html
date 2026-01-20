@@ -30,11 +30,6 @@
                 <input type="text" id="searchInput" placeholder="ابحث عن فيلم أو مسلسل...">
                 <button onclick="performSearch()"><i class="fas fa-search"></i></button>
             </div>
-            <div class="user-menu">
-                <span id="userGreeting" style="color: #b3b3b3; font-size: 0.9rem; margin-left: 1rem;"></span>
-                <button id="loginBtn" class="login-button" onclick="goToLogin()"><i class="fas fa-sign-in-alt"></i> دخول</button>
-                <button id="logoutBtn" class="logout-button" onclick="logout()" style="display: none;"><i class="fas fa-sign-out-alt"></i> خروج</button>
-            </div>
         </div>
     </nav>
 
@@ -192,22 +187,8 @@
                         </select>
                     </div>
                     <div class="player-container">
-                        <iframe id="videoPlayer" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe id="videoPlayer" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
                     </div>
-                </div>
-
-                <!-- Subtitles Section -->
-                <div class="subtitles-section">
-                    <h3>الترجمة</h3>
-                    <div class="subtitle-controls">
-                        <select id="subtitleSelect" onchange="loadSubtitle()">
-                            <option value="">بدون ترجمة</option>
-                            <option value="ar">العربية</option>
-                            <option value="en">الإنجليزية</option>
-                        </select>
-                        <button onclick="downloadSubtitle()" class="download-btn"><i class="fas fa-download"></i> تحميل</button>
-                    </div>
-                    <div id="subtitleDisplay" class="subtitle-display"></div>
                 </div>
 
                 <!-- Additional Info -->
