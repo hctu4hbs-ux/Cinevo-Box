@@ -4,6 +4,8 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-blue?style=flat-square)
 ![Developer](https://img.shields.io/badge/Developer-eyad%20al--juhani-orange?style=flat-square)
 
+**🌐 [زر الموقع الحي الآن](https://hctu4hbs-ux.github.io/Cinevo-Box/)** | **[GitHub](https://github.com/hctu4hbs-ux/Cinevo-Box)**
+
 موقع ويب متكامل وعملي للأفلام والمسلسلات مع دعم كامل للغة العربية.
 
 ## ✨ المميزات الرئيسية
