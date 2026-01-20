@@ -57,18 +57,93 @@ const VideoPlayer = {
 };
 
 // Subtitle Manager
+// Subtitle Manager with API integration
 const SubtitleManager = {
     currentSubtitleUrl: null,
     subtitles: [],
     isEnabled: false,
+    currentLanguage: 'ar',
+
+    // OpenSubtitles API Configuration
+    opensubtitlesApiKey: '3fWCgxEk3GOR9yo7Cvgg4VH1TRjbLv79',
+    
+    // SubDL API Configuration
+    subdlApiKey: 'KZSK8ICeSSEGmkLU4Oo7FklxGY-JtCem',
+
+    // Load Arabic subtitles from multiple sources
+    loadArabicSubtitles: async function(imdbId, title) {
+        try {
+            // Try OpenSubtitles first
+            let subtitleUrl = await this.fetchFromOpenSubtitles(imdbId);
+            
+            // Fallback to SubDL if OpenSubtitles fails
+            if (!subtitleUrl) {
+                subtitleUrl = await this.fetchFromSubDL(title);
+            }
+            
+            // If we found a subtitle URL, load it
+            if (subtitleUrl) {
+                return await this.loadSubtitles(subtitleUrl, 'ar');
+            }
+            
+            console.log('Arabic subtitles available through video player');
+            return null;
+        } catch (error) {
+            console.error('Error loading Arabic subtitles:', error);
+            return null;
+        }
+    },
+
+    // Fetch from OpenSubtitles API
+    fetchFromOpenSubtitles: async function(imdbId) {
+        try {
+            const response = await fetch(`https://api.opensubtitles.com/api/v1/subtitles?imdb_id=${imdbId}&language_code=ar&api_key=${this.opensubtitlesApiKey}`);
+            if (response.ok) {
+                const data = await response.json();
+                if (data.data && data.data.length > 0) {
+                    // Return the first Arabic subtitle URL
+                    return data.data[0].url;
+                }
+            }
+            return null;
+        } catch (error) {
+            console.error('OpenSubtitles fetch error:', error);
+            return null;
+        }
+    },
+
+    // Fetch from SubDL API
+    fetchFromSubDL: async function(title) {
+        try {
+            const encodedTitle = encodeURIComponent(title);
+            const response = await fetch(`https://api.subdl.com/api/v1/subtitles/search?query=${encodedTitle}&languages=ar&api_key=${this.subdlApiKey}`);
+            if (response.ok) {
+                const data = await response.json();
+                if (data.subtitles && data.subtitles.length > 0) {
+                    // Return the first Arabic subtitle download URL
+                    return data.subtitles[0].url;
+                }
+            }
+            return null;
+        } catch (error) {
+            console.error('SubDL fetch error:', error);
+            return null;
+        }
+    },
 
     // Load subtitle file
     loadSubtitles: async function(url, language = 'ar') {
         try {
             const response = await fetch(url);
+            if (!response.ok) {
+                console.log('Failed to fetch subtitle file');
+                return null;
+            }
+            
             const text = await response.text();
             this.parseSubtitles(text);
             this.isEnabled = true;
+            this.currentLanguage = language;
             return this.subtitles;
         } catch (error) {
             console.error('Error loading subtitles:', error);

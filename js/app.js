@@ -426,13 +426,22 @@ function changeSource() {
 
 // Load Arabic Subtitles
 function loadArabicSubtitles(imdbId) {
-    // Simulating subtitle loading
-    const display = document.getElementById('subtitleDisplay');
-    display.innerHTML = '<p style="color: var(--text-secondary);">جاري البحث عن ترجمات عربية...</p>';
-    
-    setTimeout(() => {
-        display.innerHTML = '<p style="color: var(--text-secondary);">الترجمات العربية متوفرة للتحميل</p>';
-    }, 1000);
+    // Load Arabic subtitles from OpenSubtitles and SubDL APIs
+    SubtitleManager.loadArabicSubtitles(imdbId, window.currentDetails?.title)
+        .then(subtitles => {
+            if (subtitles && subtitles.length > 0) {
+                console.log('Arabic subtitles loaded successfully');
+                SubtitleManager.isEnabled = true;
+                showNotification('الترجمات العربية متاحة - اخترها من قائمة الترجمات في المشغل', 'success');
+            } else {
+                console.log('No Arabic subtitles found, using embedded player subtitles');
+                showNotification('اختر الترجمات من قائمة الترجمات في مشغل الفيديو', 'info');
+            }
+        })
+        .catch(error => {
+            console.error('Error loading subtitles:', error);
+            showNotification('جاري البحث عن الترجمات من خلال مشغل الفيديو', 'info');
+        });
 }
 
 // Load Subtitle
