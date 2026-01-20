@@ -12,6 +12,7 @@ let favorites = JSON.parse(localStorage.getItem('cinevoFavorites')) || [];
 document.addEventListener('DOMContentLoaded', function() {
     loadSection('home');
     setupEventListeners();
+    checkLoginStatus();
 });
 
 // Setup Event Listeners
@@ -592,3 +593,50 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Check Login Status
+function checkLoginStatus() {
+    const isLoggedIn = localStorage.getItem('cinevoLoggedIn') === 'true';
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const userGreeting = document.getElementById('userGreeting');
+    
+    if (isLoggedIn) {
+        loginBtn.style.display = 'none';
+        logoutBtn.style.display = 'flex';
+        
+        const userData = localStorage.getItem('cinevoUser');
+        const email = localStorage.getItem('cinevoEmail');
+        const username = localStorage.getItem('cinevoUsername');
+        
+        if (userData) {
+            const user = JSON.parse(userData);
+            userGreeting.textContent = `مرحباً، ${user.firstName}`;
+        } else if (username) {
+            userGreeting.textContent = `مرحباً، ${username}`;
+        }
+    } else {
+        loginBtn.style.display = 'flex';
+        logoutBtn.style.display = 'none';
+        userGreeting.textContent = '';
+    }
+}
+
+// Go to Login
+function goToLogin() {
+    window.location.href = 'login.html';
+}
+
+// Logout
+function logout() {
+    localStorage.removeItem('cinevoLoggedIn');
+    localStorage.removeItem('cinevoUser');
+    localStorage.removeItem('cinevoUsername');
+    
+    showNotification('تم تسجيل الخروج بنجاح', 'success');
+    
+    setTimeout(() => {
+        checkLoginStatus();
+        loadSection('home');
+    }, 1500);
+}

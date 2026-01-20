@@ -30,6 +30,11 @@
                 <input type="text" id="searchInput" placeholder="ابحث عن فيلم أو مسلسل...">
                 <button onclick="performSearch()"><i class="fas fa-search"></i></button>
             </div>
+            <div class="user-menu">
+                <span id="userGreeting" style="color: #b3b3b3; font-size: 0.9rem; margin-left: 1rem;"></span>
+                <button id="loginBtn" class="login-button" onclick="goToLogin()"><i class="fas fa-sign-in-alt"></i> دخول</button>
+                <button id="logoutBtn" class="logout-button" onclick="logout()" style="display: none;"><i class="fas fa-sign-out-alt"></i> خروج</button>
+            </div>
         </div>
     </nav>
 

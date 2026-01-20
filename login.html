@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - Cinevo Box</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            direction: rtl;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            background: #111;
+            border: 2px solid #e50914;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            box-shadow: 0 20px 60px rgba(229, 9, 20, 0.3);
+            animation: slideIn 0.5s ease-in;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logo-icon {
+            font-size: 3rem;
+            color: #e50914;
+            margin-bottom: 0.5rem;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e50914;
+        }
+        
+        .tagline {
+            text-align: center;
+            color: #b3b3b3;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #b3b3b3;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #e50914;
+            box-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+            background-color: #2a2a2a;
+        }
+        
+        input::placeholder {
+            color: #666;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+        
+        .checkbox-group label {
+            margin: 0;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        
+        .forgot-password {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+        
+        .forgot-password a {
+            color: #e50914;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        
+        .forgot-password a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        
+        .login-btn:hover {
+            background-color: #b8070d;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.4);
+        }
+        
+        .login-btn:active {
+            transform: translateY(0);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #333;
+        }
+        
+        .divider span {
+            margin: 0 1rem;
+        }
+        
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-btn {
+            padding: 0.8rem;
+            border: 1px solid #333;
+            background-color: #222;
+            color: #b3b3b3;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .social-btn:hover {
+            border-color: #e50914;
+            color: #e50914;
+            background-color: #2a2a2a;
+        }
+        
+        .signup-link {
+            text-align: center;
+            color: #b3b3b3;
+        }
+        
+        .signup-link a {
+            color: #e50914;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .signup-link a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        
+        .error {
+            color: #f44336;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+        
+        .error.show {
+            display: block;
+        }
+        
+        .success {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .success.show {
+            display: block;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-login {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <div class="logo-icon">🎬</div>
+            <div class="logo-text">Cinevo Box</div>
+        </div>
+        
+        <div class="tagline">منصة البث المتكاملة للأفلام والمسلسلات</div>
+        
+        <div class="success" id="successMsg">تم تسجيل الدخول بنجاح! جاري التحويل...</div>
+        
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني أو اسم المستخدم</label>
+                <input type="text" id="email" placeholder="أدخل بريدك الإلكتروني" required>
+                <div class="error" id="emailError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
+                <div class="error" id="passwordError"></div>
+            </div>
+            
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">تذكرني</label>
+                </div>
+            </div>
+            
+            <div class="forgot-password">
+                <a href="javascript:void(0)" onclick="showForgotPassword()">هل نسيت كلمة المرور؟</a>
+            </div>
+            
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+            </button>
+        </form>
+        
+        <div class="divider">
+            <span>أو</span>
+        </div>
+        
+        <div class="social-login">
+            <button class="social-btn" onclick="loginWithGoogle()">
+                <i class="fab fa-google"></i> Google
+            </button>
+            <button class="social-btn" onclick="loginWithFacebook()">
+                <i class="fab fa-facebook"></i> Facebook
+            </button>
+        </div>
+        
+        <div class="signup-link">
+            ليس لديك حساب؟ <a href="javascript:void(0)" onclick="goToSignup()">إنشاء حساب</a>
+        </div>
+    </div>
+    
+    <script>
+        // تحميل بيانات المستخدم المحفوظة
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedEmail = localStorage.getItem('cinevoEmail');
+            const rememberMe = localStorage.getItem('cinevoRememberMe');
+            
+            if (rememberMe === 'true' && savedEmail) {
+                document.getElementById('email').value = savedEmail;
+                document.getElementById('remember').checked = true;
+            }
+        });
+        
+        // معالجة تسجيل الدخول
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            
+            // تحقق من الصحة
+            if (!email || !password) {
+                showError('emailError', 'الرجاء ملء جميع الحقول');
+                return;
+            }
+            
+            if (email.includes('@')) {
+                // التحقق من صيغة البريد
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    showError('emailError', 'البريد الإلكتروني غير صحيح');
+                    return;
+                }
+            }
+            
+            if (password.length < 6) {
+                showError('passwordError', 'كلمة المرور يجب أن تكون 6 أحرف على الأقل');
+                return;
+            }
+            
+            // حفظ البيانات إذا تم اختيار "تذكرني"
+            if (remember) {
+                localStorage.setItem('cinevoEmail', email);
+                localStorage.setItem('cinevoRememberMe', 'true');
+            } else {
+                localStorage.removeItem('cinevoEmail');
+                localStorage.setItem('cinevoRememberMe', 'false');
+            }
+            
+            // حفظ بيانات الدخول
+            localStorage.setItem('cinevoLoggedIn', 'true');
+            localStorage.setItem('cinevoUsername', email.split('@')[0]);
+            localStorage.setItem('cinevoLoginTime', new Date().toISOString());
+            
+            // عرض رسالة النجاح
+            document.getElementById('successMsg').classList.add('show');
+            
+            // تحويل للموقع الرئيسي
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        }
+        
+        function showError(elementId, message) {
+            const errorEl = document.getElementById(elementId);
+            errorEl.textContent = message;
+            errorEl.classList.add('show');
+            
+            setTimeout(() => {
+                errorEl.classList.remove('show');
+            }, 5000);
+        }
+        
+        function showForgotPassword() {
+            const email = prompt('أدخل بريدك الإلكتروني:');
+            if (email) {
+                alert('تم إرسال رابط استعادة كلمة المرور إلى ' + email);
+            }
+        }
+        
+        function loginWithGoogle() {
+            alert('سيتم التكامل مع Google في النسخة القادمة');
+        }
+        
+        function loginWithFacebook() {
+            alert('سيتم التكامل مع Facebook في النسخة القادمة');
+        }
+        
+        function goToSignup() {
+            window.location.href = 'signup.html';
+        }
+        
+        // معالجة الإدخال
+        document.getElementById('email').addEventListener('focus', function() {
+            document.getElementById('emailError').classList.remove('show');
+        });
+        
+        document.getElementById('password').addEventListener('focus', function() {
+            document.getElementById('passwordError').classList.remove('show');
+        });
+    </script>
+</body>
+</html>

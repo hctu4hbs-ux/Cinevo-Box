@@ -131,6 +131,35 @@ button {
     transform: scale(1.05);
 }
 
+/* User Menu */
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.login-button,
+.logout-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.login-button:hover,
+.logout-button:hover {
+    background-color: #b8070d;
+    transform: scale(1.05);
+}
+
 /* Main Content */
 .main-content {
     max-width: 1400px;
