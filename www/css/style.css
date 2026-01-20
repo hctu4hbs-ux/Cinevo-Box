@@ -313,19 +313,19 @@ button {
 .category-btn {
     background: rgba(255, 255, 255, 0.05);
     color: var(--text-color);
-    border: 2px solid var(--border-color);
-    padding: 0.8rem 1.8rem;
+    border: 1px solid var(--border-color);
+    padding: 0.7rem 1.5rem;
     border-radius: 50px;
     cursor: pointer;
     white-space: nowrap;
     transition: var(--transition);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 .category-btn:hover {
     border-color: var(--accent-color);
-    background: rgba(255, 107, 53, 0.1);
+    background: rgba(255, 157, 43, 0.1);
     color: var(--accent-color);
 }
 
@@ -364,30 +364,11 @@ button {
 }
 
 .content-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
-    overflow-x: auto;
     padding-bottom: 1rem;
-    scroll-behavior: smooth;
-}
-
-.content-grid::-webkit-scrollbar {
-    height: 4px;
-}
-
-.content-grid::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 2px;
-}
-
-.content-grid::-webkit-scrollbar-thumb {
-    background: var(--accent-color);
-    border-radius: 2px;
-}
-
-.content-grid::-webkit-scrollbar-thumb:hover {
-    background: #ff9d2b;
 }
 
 .content-card {
@@ -396,8 +377,6 @@ button {
     overflow: hidden;
     cursor: pointer;
     transition: var(--transition);
-    flex-shrink: 0;
-    width: 180px;
     border: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
@@ -405,14 +384,14 @@ button {
 }
 
 .content-card:hover {
-    transform: scale(1.05) translateY(-8px);
+    transform: scale(1.08) translateY(-6px);
     border-color: var(--accent-color);
     box-shadow: 0 12px 30px rgba(255, 157, 43, 0.3), inset 0 0 20px rgba(255, 157, 43, 0.1);
 }
 
 .card-poster {
     width: 100%;
-    height: 270px;
+    height: 240px;
     object-fit: cover;
     background: linear-gradient(135deg, #2a2a3e, #0f0f0f);
     position: relative;
@@ -436,19 +415,19 @@ button {
 }
 
 .card-content {
-    padding: 1.2rem;
+    padding: 1rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
 .card-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--text-color);
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -457,8 +436,8 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.8rem;
-    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
 }
 
 .card-year {
